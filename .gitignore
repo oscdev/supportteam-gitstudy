@@ -26,3 +26,8 @@ pkginfo/*
 loader-wizard.php
 dev/*
 ioncube/*
+.viminfo
+serverapilog1.log
+test.php
+
+
