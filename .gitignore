@@ -1,0 +1,28 @@
+
+.modgit/
+app/etc/local.xml
+app/.htaccess
+php.ini.sample
+pkginfo/
+
+# System files
+.DS_Store
+.htaccess
+
+# IDE
+.idea
+.nbproject
+.swp
+
+
+# folder exclude
+downloader/*
+var/*
+.media/*
+privatesales/*
+media/*
+pkginfo/*
+.ssh/*
+loader-wizard.php
+dev/*
+ioncube/*

@@ -1,0 +1,133 @@
+<?php //$storePhone = Mage::getStoreConfig('general/locale/timezone');
+//date_default_timezone_set($storePhone);
+
+echo 'test '.date_default_timezone_set();
+
+//echo date('d-m-Y H:i');
+$_timestamp = Date("l");
+$_time =  Date("h:i:s a");
+//echo 'test '.$_time;
+$_currtime = strtotime($_time) .'<br>';
+$_starttime = strtotime('12:00:00 am').'<br>';
+$_endtime = strtotime('08:00:00 pm').'<br>';
+$_opentime = 0;
+if(($_timestamp == "Monday" || $_timestamp =="Tuesday")){
+    $_starttime = strtotime('12:00:00 am').'<br>';
+    $_endtime = strtotime('05:30:00 pm').'<br>';
+}
+if(($_currtime >= $_starttime) && ($_currtime <= $_endtime)) {
+    $_opentime =1;
+} else{
+    $_opentime =2;
+} ?>
+<span id="timeto" class="time-to-call">
+<?php
+switch ($_timestamp)
+{
+    case "Monday":
+        if (date("d")=="26"){
+            echo "Call Tomorrow 9am - 5.30pm";
+        }
+        else if($_opentime ==1 ){
+            echo "Call Today: 8am - 5:30pm";
+        }
+        else{
+            echo "Call Tomorrow: 8am - 8pm";
+        }
+        break;
+    case "Tuesday":
+        if($_opentime==1){
+            echo "Call Today: 8am - 5:30pm";
+        }else{
+            echo "Call Tomorrow: 8am-8pm";
+        }
+        break;
+    case "Wednesday":
+        if($_opentime==1){
+            echo "Call Today: 8am - 8pm";
+        }else{
+            echo "Call Tomorrow: 8am-8pm";
+        }
+        break;
+    /*case "Thursday":
+        if($_opentime==1){
+             echo "Call Today: 8am-8pm";
+        }else{
+             echo "Call Tomorrow: 8am-8pm";
+        }
+      break;*/
+    case "Friday":
+        if($_opentime==1){
+            echo "Call Today: 8am-8pm";
+        }else{
+            echo "Call Tuesday: 9am - 5.30pm";
+        }
+        break;
+    case "Saturday":
+        if(date("d")=='24' ){
+            echo "Call Tuesday: 9am - 5.30pm";
+        }else{
+            echo "Call Monday: 9am - 5.30pm";
+        }
+        break;
+    case "Sunday":
+        if(date("d")=='25'){
+            echo "Call Tuesday: 9am - 5.30pm";
+        }else{
+            echo "Call Tomorrow: 9am - 5.30pm";
+        }
+        break;
+    default:
+        if($_opentime==1){
+            echo "Call Today: 8am-8pm";
+        }else{
+            echo "Call Tomorrow: 8am-8pm";
+        }
+}
+?>
+</span>
+<div id="open-time"  style="display:none;">
+    <div id="timeopenpContent" >
+        <div class="open-wraper">
+            <h3 class="sub-heading"><?php echo $this->__('Opening Times')?></h3>
+            <a href="javascript:void(0)" id="contact-pop-up">Close</a>
+
+            <div class="open-content">
+                <p class="heading"><?php echo $this->__('Normal Opening Times')?></p>
+                <span class="mon-fri timeopen"><?php echo $this->__('Monday-Friday: 8am-8pm ')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Saturday-Sunday: 9am-5:30pm')?></span>
+            </div>
+            <div class="open-content">
+                <p class="heading"><?php echo $this->__('Festive Opening Times')?></p>
+                <span class="mon-fri timeopen"><?php echo $this->__('Thu 22nd Dec: 8am-8pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Fri 23rd Dec: 8am-8pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Christmas Eve: CLOSED')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Christmas Day: CLOSED')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Boxing Day: CLOSED')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Tues 27th Dec: 9am-5:30pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Wed 28th Dec: 8am-8pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Thu 29th Dec: 8am-8pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__('Fri 30th Dec: 8am-8pm')?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__("New Year's Eve: CLOSED")?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__("New Year's Day: CLOSED")?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__("Mon 2nd Jan: 9am-5:30pm")?></span>
+                <span class="mon-fri timeopen"><?php echo $this->__("Tue 3rd Jan: 8am-8pm")?></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var contents = jQuery('#timeopenpContent').html();
+    jQuery('#timeto').tooltipster({
+        content: jQuery(contents),
+        animation: 'fade',
+        delay: 200,
+        theme: 'tooltipster-default',
+        touchDevices: true,
+        onlyOne: true,
+        trigger: 'hover',
+        position: 'bottom-right'
+    });
+</script>
+
